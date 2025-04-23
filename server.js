@@ -21,7 +21,7 @@ const cors =require("cors");
  connectDB();
  app.use(cors({
     origin:"http/localhost:3000",
-    credentials:true
+    credentials:true,
  }))
  // bcrypt library -> npm install bcrypt 
  app.use(express.json())
