@@ -1,4 +1,5 @@
 const express = require("express");
+
 const cors =require("cors");
  
  const connectDB = require("./database");
@@ -20,6 +21,7 @@ const cors =require("cors");
  connectDB();
  app.use(cors({
     origin:"http/localhost:3000",
+    credentials:true
  }))
  // bcrypt library -> npm install bcrypt 
  app.use(express.json())
@@ -66,7 +68,7 @@ const cors =require("cors");
 
 
 
-app.post("/register-user", async (req, res, next) => {
+app.post("/register-user", async (req, res, _next) => {
     try {
         const { name, email, password, contact, role } = req.body;
 
@@ -101,8 +103,8 @@ app.post("/register-user", async (req, res, next) => {
  
  // database se data extract krne ke liye hmm log get method ka use krenge 
  
- app.get("/all",logger,authtoken,async (req,res)=>{
- app.get("/all",logger,authMiddleware,authorizeRole('Trainer'),async (req,res)=>{
+ app.get("/all",logger,authtoken,async (_req, _res)=>{
+ app.get("/all",logger,authMiddleware,authorizeRole('Trainer'),async (_req,res)=>{
      try{
           // Jab database se sare users ko find krna ho to kaun sa method use krenge - 
           // {id:1,name:Ram,class:3,address:"Hisar"},{id:2,name:Mohan,class:3,address:"Rohtak"}
@@ -152,23 +154,23 @@ app.post("/register-user", async (req, res, next) => {
  
  // Routes for fetching all course 
  
-app.get("/allcourses",async(req,res)=>{
+app.get("/allcourses",async(_req,res)=>{
      try{
          
-         const{search,duration,category}=req.query;
-         const {banner} = req.body
-         let filters={}
-         if(search){
-             filters.title={$regex:search,$options:"i"}
-         }
-         if(duration){
-             filters.duration=duration;
-         }
-         if(category){
-             filters.category=category;
-         }
+        //  const{search,duration,category}=req.query;
+        //  const {banner} = req.body
+        //  let filters={}
+        //  if(search){
+        //      filters.title={$regex:search,$options:"i"}
+        //  }
+        //  if(duration){
+        //      filters.duration=duration;
+        //  }
+        //  if(category){
+        //      filters.category=category;
+        //  }
          
-         const courses= await Course.find(filters);
+         const courses= await Course.find();
         //  console.log(Course.banner);
         return res.status(200).json({message:"All courses found successfully",courses})
      }catch(error){
@@ -176,7 +178,7 @@ app.get("/allcourses",async(req,res)=>{
      }
  })
  //put users
- app.put("/users/:id",logger,async(req,res)=>{
+ app.put("/users/:id",logger,async(_req,res)=>{
      try{
            // findByIdAndUpdate -> Sabse phle id ke basis pr find karna uske bad update krna 
 
