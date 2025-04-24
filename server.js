@@ -25,7 +25,7 @@ const cors =require("cors");
  }))
  // bcrypt library -> npm install bcrypt 
  app.use(express.json())
- app.use(errorHandler);
+//  app.use(errorHandler);
  // ye line hmme database me json formate to data parse(bhejne) karne me help kregi 
  // database me phla user insert krna
  
