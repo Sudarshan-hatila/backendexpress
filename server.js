@@ -1,4 +1,4 @@
-const express = require("express");
+const express=require ("express");
 
 const cors =require("cors");
  
@@ -9,7 +9,7 @@ const cors =require("cors");
  const bcrypt= require("bcrypt");
  const logger= require("./middleware/logger")
  const jwt=require("jsonwebtoken") 
- const errorHandler=require("./middleware/errorHandler");
+//  const errorHandler=require("./middleware/errorHandler");
  const Course=require("./models/course")
  const authtoken=require("./middleware/authtoken")
  const {authMiddleware,authorizeRole}= require("./middleware/authorization");
@@ -49,7 +49,7 @@ const cors =require("cors");
 //     //    const newUser= new User({name,email,password:hashedPassword,contact,otp});
 //        const newUser= new User({name,email,password:hashedPassword,contact,otp,role});
 //        await newUser.save();
-//        const subject='Welcome to our Platform 🔥 Your Otp For Verification'
+//        const subject='Welcome to our Platform  Your Otp For Verification'
 //        const text= `Hi ${name} , Thank You for registering at our platform . Your Otp is ${otp}, Please don't share it to anybody else.`
  
 //        const html= `
@@ -235,27 +235,3 @@ app.post('/login',async (req,res) => {
  app.listen(5001,()=>{
      console.log("Server is running on localhost:5000")
  })
-//==========================login================================
-
-//  app.post("/login", logger, async (req, res, next) => {
-//     try {
-//         const { email, password } = req.body;
-//         const user = await User.findOne({ email });
-
-//         if (!user) {
-//             return res.status(403).json({ message: "User does not exist" });
-//         }
-
-//         const match = await bcrypt.compare(password, user.password);
-
-//         if (!match) {
-//             return res.status(401).json({ message: "Incorrect password" });
-//         }
-
-//         const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-//         return res.status(200).json({ message: "Login successful", token });
-//     } catch (error) {
-//         next(error);
-//     }
-// });
